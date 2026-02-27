@@ -97,10 +97,23 @@ async function processVideo(videoId: string) {
         await new Promise<void>((resolve, reject) => {
             const ffmpeg = spawn(ffmpegPath, [
                 "-i", inputPath,
-                "-c:v", "libx264", "-pix_fmt", "yuv420p",
-                "-preset", "veryfast", "-crf", "28",
-                "-vf", "scale='min(1280,iw)':-2",
-                "-c:a", "aac", "-ac", "2", "-b:a", "128k",
+
+                // --- CUTTING EDGE VIDEO STANDARDS ---
+                // Quality: High Profile, CRF 23 (Visually Lossless for web), 1080p Max
+                "-c:v", "libx264",
+                "-profile:v", "high",
+                "-pix_fmt", "yuv420p",
+                "-preset", "fast",
+                "-crf", "23",
+                "-vf", "scale='min(1920,iw)':-2",
+
+                // --- INDUSTRY STANDARD AUDIO MASTERING ---
+                // Loudness: EBU R128 to -14 LUFS (YouTube/Netflix Target), 192kbps AAC Stereo
+                "-c:a", "aac",
+                "-ac", "2",
+                "-b:a", "192k",
+                "-af", "loudnorm=I=-14:LRA=11:TP=-1.5",
+
                 "-y", outputPath
             ], { stdio: 'inherit' });
 
