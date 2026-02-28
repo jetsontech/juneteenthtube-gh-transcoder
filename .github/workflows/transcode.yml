@@ -23,8 +23,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build TypeScript
-        run: npx tsc index.ts --esModuleInterop
+      - name: Set Permissions
+        run: chmod -R +x node_modules/
 
       - name: Run Transcoder
         env:
