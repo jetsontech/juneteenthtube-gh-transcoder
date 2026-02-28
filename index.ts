@@ -8,7 +8,14 @@ import { tmpdir } from "os";
 import { randomUUID } from "crypto";
 import { Readable } from "stream";
 import * as dotenv from "dotenv";
-import ffmpegStatic from "ffmpeg-static";
+
+let ffmpegStatic = "ffmpeg";
+try {
+    const fsPath = require("ffmpeg-static");
+    if (fsPath) ffmpegStatic = fsPath;
+} catch (e) {
+    console.warn("ffmpeg-static not found or failed, falling back to system ffmpeg.");
+}
 
 dotenv.config();
 
