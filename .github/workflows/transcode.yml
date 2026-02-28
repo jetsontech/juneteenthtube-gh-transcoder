@@ -30,26 +30,20 @@ jobs:
         run: chmod -R +x node_modules/
 
       - name: Run Transcoder
+        # noinspection ALL
         env:
           # Passed from the webhook payload (e.g. { "client_payload": { "videoId": "..." } })
           VIDEO_ID: ${{ github.event.client_payload.videoId }}
           
           # Environment variables mapped from GitHub Repository Secrets
-          # noinspection GitHubActionsUnknownSecret
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets['NEXT_PUBLIC_SUPABASE_URL'] }}
-          # noinspection GitHubActionsUnknownSecret
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets['SUPABASE_SERVICE_ROLE_KEY'] }}
-          # noinspection GitHubActionsUnknownSecret
-          S3_ACCESS_KEY_ID: ${{ secrets['R2_ACCESS_KEY_ID'] }}
-          # noinspection GitHubActionsUnknownSecret
-          S3_SECRET_ACCESS_KEY: ${{ secrets['R2_SECRET_ACCESS_KEY'] }}
-          # noinspection GitHubActionsUnknownSecret
-          S3_ENDPOINT: ${{ secrets['R2_ENDPOINT'] }}
-          # noinspection GitHubActionsUnknownSecret
-          S3_BUCKET_NAME: ${{ secrets['R2_BUCKET_NAME'] }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          S3_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          S3_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          S3_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          S3_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
           S3_REGION: "auto"
-          # noinspection GitHubActionsUnknownSecret
-          S3_PUBLIC_DOMAIN: ${{ secrets['R2_PUBLIC_DOMAIN'] }}
+          S3_PUBLIC_DOMAIN: ${{ secrets.R2_PUBLIC_DOMAIN }}
         run: |
           npx tsc index.ts --esModuleInterop
           node index.js
