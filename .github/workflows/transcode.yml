@@ -26,6 +26,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Set Permissions
+        run: chmod -R +x node_modules/
+
       - name: Run Transcoder
         env:
           # Passed from the webhook payload (e.g. { "client_payload": { "videoId": "..." } })
@@ -47,4 +50,6 @@ jobs:
           S3_REGION: "auto"
           # noinspection GitHubActionsUnknownSecret
           S3_PUBLIC_DOMAIN: ${{ secrets['R2_PUBLIC_DOMAIN'] }}
-        run: npm start
+        run: |
+          npx tsc index.ts --esModuleInterop
+          node index.js

@@ -9,13 +9,8 @@ import { randomUUID } from "crypto";
 import { Readable } from "stream";
 import * as dotenv from "dotenv";
 
-let ffmpegStatic = "ffmpeg";
-try {
-    const fsPath = require("ffmpeg-static");
-    if (fsPath) ffmpegStatic = fsPath;
-} catch (e) {
-    console.warn("ffmpeg-static not found or failed, falling back to system ffmpeg.");
-}
+// Use system ffmpeg installed via apt-get in GitHub Actions
+const ffmpegStatic = "ffmpeg";
 
 dotenv.config();
 
