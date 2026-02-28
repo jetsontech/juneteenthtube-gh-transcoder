@@ -23,6 +23,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build TypeScript
+        run: npx tsc index.ts --esModuleInterop
+
       - name: Run Transcoder
         env:
           # Passed from the webhook payload (e.g. { "client_payload": { "videoId": "..." } })

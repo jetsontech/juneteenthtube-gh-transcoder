@@ -4,7 +4,7 @@
     "description": "GitHub Actions based video transcoder for JuneteenthTube",
     "main": "index.js",
     "scripts": {
-        "start": "npx tsx index.ts"
+        "start": "node index.js"
     },
     "keywords": [],
     "author": "",
