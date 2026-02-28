@@ -114,6 +114,9 @@ async function processVideo(videoId: string) {
                 "-b:a", "192k",
                 "-af", "loudnorm=I=-14:LRA=11:TP=-1.5",
 
+                // Ensures MP4 metadata is at the start of the file for instant streaming
+                "-movflags", "+faststart",
+
                 "-y", outputPath
             ], { stdio: 'inherit' });
 
