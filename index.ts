@@ -107,7 +107,7 @@ async function processVideo(videoId: string) {
                 "-pix_fmt", "yuv420p",
                 "-preset", "fast",
                 "-crf", "23",
-                "-vf", "scale='min(1920,iw)':-2",
+                "-vf", "scale=min(1920\\,iw):-2",
 
                 // --- INDUSTRY STANDARD AUDIO MASTERING ---
                 // Loudness: EBU R128 to -14 LUFS (YouTube/Netflix Target), 192kbps AAC Stereo
